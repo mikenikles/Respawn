@@ -5,7 +5,15 @@ const config = {
     kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
-        adapter: vercel()
+        adapter: vercel(),
+        vite: {
+            server: {
+                hmr: {
+                    clientPort: 443,
+                    host: process.env.HMR_HOST ? process.env.HMR_HOST.substring("https://".length) : "127.0.0.1"
+				}
+            }
+        }
 	},
 
     preprocess: [preprocess({
